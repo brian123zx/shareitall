@@ -1,0 +1,16 @@
+{
+  "name": "shareitall",
+  "version": "1.0.0",
+  "description": "Front-end only share app based on webtorrent",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev": "webpack-dev-server"
+  },
+  "author": "Brian Cooper",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack-dev-server": "^2.3.0"
+  }
+}
