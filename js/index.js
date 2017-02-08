@@ -41,6 +41,11 @@ if(urlparams.length > 1) {
 }
 
 $(() => {
+	if(!WebTorrent.WEBRTC_SUPPORT) {
+		$('#nosupport').show();
+		return;
+	}
+
 	$('#myfileinput').on('change', () => {
 		// get files
 		let files = $('#myfileinput')[0].files;
