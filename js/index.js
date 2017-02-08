@@ -1,3 +1,5 @@
+require('file-loader?name=[name].[ext]!../index.html');
+
 import _ from 'lodash';
 // import WebTorrent from 'webtorrent';
 
