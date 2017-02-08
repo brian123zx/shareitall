@@ -47,6 +47,7 @@ $(() => {
 		// seed files
 		client.seed(files, undefined, (torrent) => {
 			console.log('torrent seeded', torrent, torrent.magnetURI);
+			setupListeners(torrent);
 			let magnet = torrent.magnetURI;
 
 			let shareurl = `${location.host}${location.pathname}?share=${encodeURIComponent(magnet)}`;
