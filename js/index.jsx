@@ -7,7 +7,20 @@ import App from './components/app/app';
 
 
 $(() => {
-	const app = <App />;
+	let urlparams = location.href.split('?');
+	let sharedTorrent;
+	if(urlparams.length > 1) {
+		urlparams = urlparams[1].split('&');
+		urlparams = _.reduce(urlparams, (obj, p) => {
+			let split = p.split('=');
+			obj[split[0]] = split[1];
+			return obj;
+		}, {});
+		if(urlparams.share) {
+			sharedTorrent = decodeURIComponent(urlparams.share);
+		}
+	}
+	const app = <App shareURL={sharedTorrent} />;
 	ReactDOM.render(app, document.getElementById('app'));
 });
 
