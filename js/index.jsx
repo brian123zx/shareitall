@@ -1,7 +1,15 @@
 require('file-loader?name=[name].[ext]!../index.html');
 
-import _ from 'lodash';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/app/app';
 // import WebTorrent from 'webtorrent';
+
+
+$(() => {
+	const app = <App />;
+	ReactDOM.render(app, document.getElementById('app'));
+});
 
 (() => {
 
@@ -88,4 +96,4 @@ import _ from 'lodash';
 			}
 		});
 	});
-})();
+});
