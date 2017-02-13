@@ -18,11 +18,7 @@ export default class App extends React.Component {
 	componentDidMount() {
 		if(this.props.shareURL) {
 			const torrent = this.client.add(this.props.shareURL, undefined, (torrent) => {
-				_.each(torrent.files, (file) => {
-					file.getBlobURL((err, url) => {
-						console.log('downloaded', url);
-					});
-				});
+				console.log('ready!!!!');
 			});
 			this.setState({
 				incomingTorrent: torrent
@@ -30,9 +26,6 @@ export default class App extends React.Component {
 		}
 	}
 	onFilesPicked(files) {
-		// create torrent, add files
-
-		// seed files
 		this.client.seed(files, undefined, (torrent) => {
 			this.setState({
 				sharedTorrent: torrent

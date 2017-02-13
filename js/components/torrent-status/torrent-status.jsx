@@ -19,6 +19,7 @@ export default class TorrentStatus extends React.Component {
 				{ name: 'transfer', from: 'connected', to: 'transferring' },
 				{ name: 'complete', from: 'transferring', to: 'done' }
 			],
+			error: () => {},
 			callbacks: {
 				onenterstate: this.onEnterState
 			}
@@ -31,6 +32,9 @@ export default class TorrentStatus extends React.Component {
 	}
 	componentDidMount() {
 		this.updateInterval = setInterval(this.updateSpeeds, 1000);
+	}
+	componentWillUnmount() {
+		clearInterval(this.updateInterval);
 	}
 	setupListeners(torrent) {
 		_.map(['infoHash', 'metadata', 'ready', 'warning', 'error', 'wire', 'noPeers', 'download', 'upload', 'done'], (event) => {
@@ -75,7 +79,7 @@ export default class TorrentStatus extends React.Component {
 		let peerNum;
 		let downloadStatus;
 		let files;
-		if(~['connected', 'transferring'].indexOf(this.state.status)) {
+		if(~['connected', 'transferring', 'done'].indexOf(this.state.status)) {
 			transferStatus = (
 				<div className="transfer-status">
 					Downloading: {this.state.downloadSpeed}, Uploading: {this.state.uploadSpeed}
@@ -88,7 +92,7 @@ export default class TorrentStatus extends React.Component {
 			);
 			downloadStatus = this.props.role === 'download' ? (
 				<div>
-					Progress: {this.state.progress*100}%
+					Progress: {Math.floor(this.state.progress*100)}%
 				</div>
 			) : null;
 			files = this.props.torrent.files.map((file) => {
