@@ -82,17 +82,20 @@ export default class TorrentStatus extends React.Component {
 		if(~['connected', 'transferring', 'done'].indexOf(this.state.status)) {
 			transferStatus = (
 				<div className="transfer-status">
-					Downloading: {this.state.downloadSpeed}, Uploading: {this.state.uploadSpeed}
+					<label>Downloading</label>
+					{this.state.downloadSpeed}, Uploading: {this.state.uploadSpeed}
 				</div>
 			);
 			peerNum = (
 				<div>
-					Connected to {this.state.numPeers} peers
+					<label>Connected to </label>
+					{this.state.numPeers} peers
 				</div>
 			);
 			downloadStatus = this.props.role === 'download' ? (
 				<div>
-					Progress: {Math.floor(this.state.progress*100)}%
+					<label>Progress</label>
+					{Math.floor(this.state.progress*100)}%
 				</div>
 			) : null;
 			files = this.props.torrent.files.map((file) => {
@@ -103,7 +106,8 @@ export default class TorrentStatus extends React.Component {
 		return (
 			<div className="torrent-status">
 				<div className="status">
-					Status: {this.state.status}
+					<label>Status</label>
+					{this.state.status}
 				</div>
 				{peerNum}
 				{transferStatus}

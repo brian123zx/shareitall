@@ -33,16 +33,28 @@ export default class FileStatus extends React.Component {
 		});
 	}
 	render() {
-		let downloadLink;
-		if(this.state.downloadURL) {
-			downloadLink = <a download={this.state.name} href={this.state.downloadURL}>Download</a>;
-		}
+		let progress = this.state.downloadURL ? (
+			<div>
+				<label>Done!</label>
+				<a download={this.state.name} href={this.state.downloadURL}>Download</a>
+			</div>
+		) : (
+			<div>
+				<label>Progress</label>
+				{Math.floor(this.state.downloaded/this.state.length*100)}%
+			</div>
+		);
 		return (
 			<div className="file-status">
-				<a href="javascript:void(0);">Name: {this.state.name}</a><br/>
-				Size: {this.state.length}<br/>
-				progress: {Math.floor(this.state.downloaded/this.state.length*100)}%<br/>
-				{downloadLink}
+				<div>
+					<label>Name</label>
+					<a href="javascript:void(0);">{this.state.name}</a>
+				</div>
+				<div>
+					<label>Size</label>
+					{this.state.length}
+				</div>
+				{progress}
 			</div>
 		);
 	}
